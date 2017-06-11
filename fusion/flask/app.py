@@ -1,6 +1,6 @@
-"""fusion is the app entry"""
+"""app entry"""
 from flask import Flask, request, jsonify
-from fusion.api import ifcdta, util
+from fusion.api import ifc, util
 from fusion.flask.exception import InvalidUsage
 
 app = Flask(__name__)
@@ -23,15 +23,15 @@ def interface():
     """add or get interface """
     logger.debug(request)
     if request.method == 'POST':
-        ifc = request.get_json()
-        name = ifc['name']
-        fields = ifc['fields']
-        msg = ifcdta.addifc(name, fields)
+        req = request.get_json()
+        name = req['name']
+        fields = req['fields']
+        msg = ifc.addifc(name, fields)
         return jsonify(msg)
     else:
         name = request.args.get('name')
-        ifc = ifcdta.getifc(name)
-        return jsonify(ifc)
+        resp = ifc.getifc(name)
+        return jsonify(resp)
 
 @app.errorhandler(InvalidUsage)
 def handle_invalid_usage(error):

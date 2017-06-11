@@ -1,3 +1,2 @@
 """ package mysql"""
-
-__all__ = ['conn']
+__all__ = ['database', 'models']
