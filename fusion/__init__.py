@@ -1,3 +1,3 @@
 """package fusion """
 
-__all__ = ['api', 'mysql']
+__all__ = ['api', 'flask', 'mysql']

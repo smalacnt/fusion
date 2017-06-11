@@ -1,48 +1,50 @@
 """fusion is the app entry"""
 from flask import Flask, request, jsonify
 from fusion.api import ifcdta, util
-from fusion.flask.exception_handle import InvalidUsage
+from fusion.flask.exception import InvalidUsage
 
-APP = Flask(__name__)
-LOG = APP.logger
+app = Flask(__name__)
+logger = app.logger
 
-@APP.route('/')
+@app.route('/')
 def index():
     """index return the index page """
     return 'Welcome come to Fusion'
 
-@APP.route('/api/ifc', methods=['POST', 'GET'])
+@app.route('/api/dbtime', methods=['GET'])
+def dbtime():
+    """return databse time"""
+    resp = dict()
+    resp['time'] = str(util.get_dbtime())
+    return jsonify(resp)
+
+@app.route('/api/ifc', methods=['POST', 'GET'])
 def interface():
     """add or get interface """
-    LOG.debug(request)
+    logger.debug(request)
     if request.method == 'POST':
         ifc = request.get_json()
         name = ifc['name']
         fields = ifc['fields']
-        ifcdta.addifc(name, fields)
-        return 'OK'
+        msg = ifcdta.addifc(name, fields)
+        return jsonify(msg)
     else:
         name = request.args.get('name')
         ifc = ifcdta.getifc(name)
-        return ifc
+        return jsonify(ifc)
 
-@APP.route('/dbtime', methods=['GET'])
-def dbtime():
-    """return mysql database time """
-    return '%s' % util.get_dbtime()
-
-@APP.errorhandler(InvalidUsage)
+@app.errorhandler(InvalidUsage)
 def handle_invalid_usage(error):
     """handle exception and return 400 with exception message """
     response = jsonify(error.to_dict())
     response.status_code = error.status_code
     return response
 
-@APP.errorhandler(Exception)
+@app.errorhandler(Exception)
 def handle_exception(exception):
     """handle exception """
     msg = dict()
-    msg['message'] = '%s' % exception
+    msg['message'] = str(exception)
     response = jsonify(msg)
     response.status_code = 500 #Internal Server Error
     return response
