@@ -1,6 +1,6 @@
 """app entry"""
 from flask import Flask, request, jsonify
-from fusion.api import ifc, util
+from fusion.api import ifc, wke, util
 from fusion.flask.exception import InvalidUsage
 
 app = Flask(__name__)
@@ -31,6 +31,21 @@ def interface():
     else:
         name = request.args.get('name')
         resp = ifc.getifc(name)
+        return jsonify(resp)
+
+@app.route('/api/wke', methods=['POST', 'GET'])
+def wkedta():
+    """add or get wke """
+    logger.debug(request)
+    if request.method == 'POST':
+        req = request.get_json()
+        name = req['name']
+        ifcs = req['interfaces']
+        msg = wke.addwke(name, ifcs)
+        return jsonify(msg)
+    else:
+        name = request.args.get('name')
+        resp = wke.getwke(name)
         return jsonify(resp)
 
 @app.errorhandler(InvalidUsage)
