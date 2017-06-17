@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """module wke: wke data CRUD operations """
 from fusion.mysql.models import wkedta, wkeifc
 from fusion.mysql.database import engine

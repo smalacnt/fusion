@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """module ifcdta: interface data CRUD operations """
 from fusion.mysql.models import ifcdta, ifcfed
 from fusion.mysql.database import engine

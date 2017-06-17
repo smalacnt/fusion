@@ -1,2 +1,3 @@
+# -*- coding: utf-8 -*-
 """package api """
-__all__ = ['ifcdta', 'util']
+__all__ = ['wke', 'ifc', 'util']

@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """module util: api util"""
 
 from fusion.mysql.database import engine

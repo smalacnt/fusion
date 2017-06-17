@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """module models"""
 from sqlalchemy import Table
 from fusion.mysql.database import metadata

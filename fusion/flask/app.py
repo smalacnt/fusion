@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """app entry"""
 from flask import Flask, request, jsonify
 from fusion.api import ifc, wke, util

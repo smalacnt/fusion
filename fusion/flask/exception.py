@@ -1,5 +1,5 @@
+# -*- coding: utf-8 -*-
 """module exception hander """
-
 class InvalidUsage(Exception):
     """"exception handler class """
     status_code = 400

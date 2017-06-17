@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """mysql database engine """
 from sqlalchemy import create_engine, MetaData, Table
 
