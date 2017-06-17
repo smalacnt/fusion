@@ -27,7 +27,5 @@ create table if not exists wke_ifc_t(
     wkecod char(8) not null,
     ifcnam char(10) not null,
     ifcdir char(1) not null,
-    foreign key(wkecod) references wke_dta_t(wkecod),
-    foreign key(ifcnam) references ifc_dta_t(ifcnam),
     primary key(wkecod, ifcnam, ifcdir)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

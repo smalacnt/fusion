@@ -1,8 +1,8 @@
 """module util: api util"""
 
-from fusion.mysql.database import conn, engine
+from fusion.mysql.database import engine
 
 def get_dbtime():
     """return database time"""
-    (time, ) = conn.execute('SELECT current_timestamp').first()
+    (time, ) = engine.execute('SELECT current_timestamp').first()
     return time
